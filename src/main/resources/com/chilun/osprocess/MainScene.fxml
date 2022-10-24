@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chilun.osprocess.Controller.HelloController">
+  <tabs>
+    <Tab text="进程状态">
+         <content>
+            <BorderPane prefHeight="720.0" prefWidth="1500.0">
+               <bottom>
+                  <AnchorPane prefHeight="20.0" prefWidth="1500.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="Button_AddNewProcess" mnemonicParsing="false" onAction="#AddNewProcess" text="添加新进程" />
+                        <Button fx:id="Button_RestartAndChange" layoutX="418.0" mnemonicParsing="false" onAction="#RestartAndShiftDefaultQueue" text="重启并随机生成New队列" />
+                        <Button fx:id="Button_ClearAllQueue" layoutX="569.0" mnemonicParsing="false" onAction="#ClearAllQueue" text="清空全部队列" />
+                        <Button fx:id="Button_ClearNewQueue" layoutX="657.0" mnemonicParsing="false" onAction="#ClearNewQueue" text="清空NEW队列" />
+                        <Button fx:id="Button_NextStep" layoutX="76.0" mnemonicParsing="false" onAction="#NextStep" text="下一步" />
+                        <Button fx:id="Button_createDaultQueue" layoutX="303.0" mnemonicParsing="false" onAction="#CreateNewQueue" text="随机生成New队列" />
+                     </children>
+                  </AnchorPane>
+               </bottom>
+               <right>
+                  <AnchorPane prefHeight="740.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="250.0" text="挂起队列：" />
+                        <ListView fx:id="List_HaltQueue" layoutY="30.0" onMouseClicked="#ClickedHalt" prefHeight="720.0" prefWidth="250.0" />
+                     </children>
+                  </AnchorPane>
+               </right>
+               <left>
+                  <AnchorPane prefHeight="720.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label prefHeight="30.0" prefWidth="250.0" text="NEW队列：" />
+                        <ListView fx:id="List_NewQueue" layoutY="30.0" onMouseClicked="#ClickedNewToHalt" prefHeight="720.0" prefWidth="250.0" />
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="720.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label prefHeight="30.0" text="Ready队列：" />
+                        <Label layoutX="500.0" layoutY="360.0" prefHeight="30.0" text="Terminated队列：" />
+                        <Label layoutX="500.0" prefHeight="30.0" text="Waiting队列：" />
+                        <Label layoutY="360.0" prefHeight="30.0" text="Running队列：" />
+                        <ListView fx:id="List_ReadyQueue" layoutY="30.0" onMouseClicked="#ClickedReadyToHalt" prefHeight="330.0" prefWidth="500.0" />
+                        <ListView fx:id="List_WaitingQueue" layoutX="500.0" layoutY="30.0" onMouseClicked="#ClickedWaitingToHalt" prefHeight="330.0" prefWidth="500.0" />
+                        <ListView fx:id="List_RunningQueue" layoutY="390.0" onMouseClicked="#ClickedRunningToHalt" prefHeight="330.0" prefWidth="500.0" />
+                        <ListView fx:id="List_TerminatedQueue" layoutX="500.0" layoutY="390.0" prefHeight="330.0" prefWidth="500.0" />
+                        <Label layoutY="720.0" text="支持道数：无限；支持8进程并发（注：本系统为非抢占，并仅支持一台I/O设备，I/O型进程会自动在进程名前+!。双击进程可实现挂起，再次双击可取消挂起）" />
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </content>
+    </Tab>
+    <Tab text="说明">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
