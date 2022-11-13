@@ -13,7 +13,6 @@ public class ProcessFactory {
 
     static {
         Class<Process> c = Process.class;
-        ClassLoader classLoader = c.getClassLoader();
         try {
             constructor = c.getDeclaredConstructor();
         } catch (NoSuchMethodException e) {

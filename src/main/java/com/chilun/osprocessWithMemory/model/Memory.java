@@ -1,5 +1,6 @@
 package com.chilun.osprocessWithMemory.model;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -8,12 +9,12 @@ import java.util.Map;
  */
 public class Memory {
     private static final int TOTAL_SIZE = 4 * 1024;//4个G
-    private Map<Integer, Integer> noAllocateTable;//记录起始位置和终止位置
+    private Map<BigDecimal, BigDecimal> noAllocateTable;//记录起始位置和终止位置
 
-    public Memory() {
+    private Memory() {
     }
 
-    public Map<Integer, Integer> getNoAllocateTable() {
+    public Map<BigDecimal, BigDecimal> getNoAllocateTable() {
         return noAllocateTable;
     }
 
@@ -24,7 +25,7 @@ public class Memory {
                 '}';
     }
 
-    public void setNoAllocateTable(Map<Integer, Integer> noAllocateTable) {
+    public void setNoAllocateTable(Map<BigDecimal, BigDecimal> noAllocateTable) {
         this.noAllocateTable = noAllocateTable;
     }
 }
