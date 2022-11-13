@@ -84,15 +84,14 @@ public class Process {
 
     @Override
     public String toString() {
-        return "Process{" +
-                "pid='" + pid + '\'' +
-                ", runTime=" + runTime +
+        return  pid  +
+                "：剩余时间 =" + runTime +
                 ", priority=" + priority +
                 ", state=" + state +
                 ", size=" + size +
                 ", beginSite=" + beginSite +
-                ", PCBPtr='" + PCBPtr + '\'' +
-                '}';
+                ", PCBPtr='" + PCBPtr +
+                '\n';
     }
 
     @Override

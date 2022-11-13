@@ -15,6 +15,10 @@ public class RunningList {
     public static int usedTracks = 0;
     private static List<Process> runningList = new ArrayList<>();
 
+    public static List<Process> get() {
+        return runningList;
+    }
+
     public static List<Process> getOnlyReady() {
         return Collections.unmodifiableList(runningList);
     }
