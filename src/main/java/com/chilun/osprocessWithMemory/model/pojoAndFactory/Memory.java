@@ -1,4 +1,4 @@
-package com.chilun.osprocessWithMemory.model;
+package com.chilun.osprocessWithMemory.model.pojoAndFactory;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.Map;
  * @create 2022-11-13-19:24
  */
 public class Memory {
-    private static final int TOTAL_SIZE = 4 * 1024;//4个G
+    private static final BigDecimal TOTAL_SIZE = new BigDecimal(4*1024);//4个G
     private Map<BigDecimal, BigDecimal> noAllocateTable;//记录起始位置和终止位置
 
     private Memory() {

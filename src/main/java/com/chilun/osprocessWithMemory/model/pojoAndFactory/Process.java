@@ -1,4 +1,4 @@
-package com.chilun.osprocessWithMemory.model;
+package com.chilun.osprocessWithMemory.model.pojoAndFactory;
 
 import java.util.Objects;
 

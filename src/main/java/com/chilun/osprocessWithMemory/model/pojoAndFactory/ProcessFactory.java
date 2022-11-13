@@ -1,7 +1,6 @@
-package com.chilun.osprocessWithMemory.model;
+package com.chilun.osprocessWithMemory.model.pojoAndFactory;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * @auther 齿轮
