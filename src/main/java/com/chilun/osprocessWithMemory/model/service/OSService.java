@@ -65,16 +65,16 @@ public class OSService {
         }
     }
 
-    //剩下需要的方法到时候再补
-    public static void NewToReady() {
-
+    private static void recycleMemory(Memory memory, Process process) {
+        memory.recycleMemory(process.getBeginSite(), process.getSize());
+        process.setBeginSite(-1);
     }
 
     public static void OrderReadyListByPriority() {
         ReadyList.order();
     }
 
-    public static void UpdateRunningList() {
+    public static void UpdateRunningList(Memory memory) {
         List<Process> processes = RunningList.get();
         for (int i = 0; i < processes.size(); i++) {
             Process process = processes.get(i);
@@ -83,6 +83,7 @@ public class OSService {
             process.setRunTime(runTime);
             if (runTime == 0) {
                 addTerFromRunning(process);
+                recycleMemory(memory, process);
             }
         }
     }
@@ -98,12 +99,41 @@ public class OSService {
         });
     }
 
-    public static void allocateMemory(Memory memory, Process process) {
-        if (!memory.addable(process.getSize())){
+    //实现功能：将process加入Memory：更改Memory内部未分分区表、更改Process的位置属性
+    public static void allocateMemory(Memory memory, Process process) throws Exception {
+        if (!memory.addable(process.getSize())) {
             throw new RuntimeException("OSService.allocateMemory:塞不下了");
         }
         memory.order();
         List<NoAllocateItem> noAllocateTable = memory.getNoAllocateTable();
+        int index = -1;
+        if (memory.addable(process.getSize())) {
+            index = memory.getFirstPutableIndex(process.getSize());
+        }
+        if (index == -1) {
+            throw new Exception("OSService.allocateMemory放不了了");
+        }
+        NoAllocateItem item = noAllocateTable.get(index);
+        process.setBeginSite(item.getBeginSite());
+        item.setBeginSite(process.getBeginSite() + process.getSize());
+        item.setSize(item.getSize() - process.getSize());
+        if (item.getSize() == 0) {
+            noAllocateTable.remove(index);
+        }
+    }
 
+    public static void OrderNewListByPriority() {
+        NewList.order();
+    }
+
+    public static boolean addableToMemory(Memory memory, Process process) {
+        return memory.addable(process.getSize());
+    }
+
+    public static void addListToReadyFromNew(List<Process> addedList) {
+        for (Process process : addedList) {
+            ReadyList.addProcess(process);
+            NewList.deleteProcess(process);
+        }
     }
 }

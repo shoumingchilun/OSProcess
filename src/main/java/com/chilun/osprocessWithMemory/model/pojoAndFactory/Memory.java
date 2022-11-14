@@ -23,7 +23,7 @@ public class Memory {
 
     @Override
     public String toString() {
-        return "主存使用情况：" + noAllocateTable;
+        return "主存剩余情况：" + noAllocateTable;
     }
 
     public void setNoAllocateTable(List<NoAllocateItem> noAllocateTable) {
@@ -40,5 +40,45 @@ public class Memory {
         return noAllocateItem.getSize() >= size;
     }
 
+    public int getFirstPutableIndex(int size) {
+        for (int i = 0; i < noAllocateTable.size(); i++) {
+            if (size < noAllocateTable.get(i).getSize()) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
+    public void recycleMemory(int beginSite, int size) {
+        int endSite = beginSite + size;
+        boolean canMergeWithPrior = false;
+        int priorIndex = -1;
+        boolean canMergeWithNext = false;
+        int nextIndex = -1;
+        for (int i = 0; i < noAllocateTable.size() && (!canMergeWithPrior || !canMergeWithNext); i++) {
+            NoAllocateItem item1 = noAllocateTable.get(i);
+            if (item1.getSize() + item1.getBeginSite() == beginSite) {
+                priorIndex = i;
+                canMergeWithPrior = true;
+            }
+            if (item1.getBeginSite() == endSite) {
+                nextIndex = i;
+                canMergeWithNext = true;
+            }
+        }
+        if (canMergeWithNext && canMergeWithPrior) {
+            NoAllocateItem item = noAllocateTable.get(priorIndex);
+            item.setSize(item.getSize() + size + noAllocateTable.get(nextIndex).getSize());
+            noAllocateTable.remove(nextIndex);
+        } else if (canMergeWithPrior) {
+            NoAllocateItem item = noAllocateTable.get(priorIndex);
+            item.setSize(item.getSize() + size);
+        } else if (canMergeWithNext) {
+            NoAllocateItem item = noAllocateTable.get(nextIndex);
+            item.setSize(item.getSize() + size);
+            item.setBeginSite(beginSite);
+        } else {
+            noAllocateTable.add(new NoAllocateItem(beginSite, size));
+        }
+    }
 }
