@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chilun.osprocessWithMemory.controller.MainWindowController">
    <children>
       <Label layoutX="300.0" prefHeight="30.0" text="Running队列：" />
       <Label prefHeight="30.0" prefWidth="250.0" text="New队列：" />
@@ -53,13 +53,13 @@
             <TableColumn minWidth="8.000015258789062" prefWidth="100.0" text="PCB" />
          </columns>
       </TableView>
-      <Button layoutY="670.0" mnemonicParsing="false" prefHeight="30.0" text="创建自定义进程" />
-      <Button layoutX="100.0" layoutY="670.0" mnemonicParsing="false" prefHeight="30.0" text="创建随机进程" />
-      <Button layoutX="300.0" layoutY="670.0" mnemonicParsing="false" prefHeight="30.0" text="批量创建随机进程" />
-      <Button layoutX="512.0" layoutY="670.0" mnemonicParsing="false" prefHeight="30.0" text="清空全部队列" />
+      <Button fx:id="Button_CreateCustomProcess" layoutY="670.0" mnemonicParsing="false" onAction="#CreateCustomProcess" prefHeight="30.0" text="创建自定义进程" />
+      <Button fx:id="Button_CreateRandomProcess" layoutX="100.0" layoutY="670.0" mnemonicParsing="false" onAction="#CreateRandomProcess" prefHeight="30.0" text="创建随机进程" />
+      <Button fx:id="Button_CreateManyProcesses" layoutX="300.0" layoutY="670.0" mnemonicParsing="false" onAction="#CreateManyProcesses" prefHeight="30.0" text="批量创建随机进程" />
+      <Button fx:id="Button_ClearAll" layoutX="512.0" layoutY="670.0" mnemonicParsing="false" onAction="#ClearAll" prefHeight="30.0" text="清空全部队列" />
       <Label layoutX="600.0" prefHeight="30.0" prefWidth="200.0" text="未分分区表：" />
       <Label layoutX="800.0" layoutY="-1.0" prefHeight="30.0" prefWidth="200.0" text="图形演示：" />
       <ListView fx:id="ListView_noAllocateTable" layoutX="600.0" layoutY="30.0" prefHeight="670.0" prefWidth="200.0" />
-      <Button layoutX="188.0" layoutY="670.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="112.0" text="下一步" />
+      <Button fx:id="Button_NextStep" layoutX="188.0" layoutY="670.0" mnemonicParsing="false" onAction="#NextStep" prefHeight="30.0" prefWidth="112.0" text="下一步" />
    </children>
 </AnchorPane>

@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -22,5 +23,59 @@ import java.util.List;
  */
 
 public class MainWindowController {
+    @FXML
+    private Button Button_ClearAll;
+
+    @FXML
+    private Button Button_CreateCustomProcess;
+
+    @FXML
+    private Button Button_CreateManyProcesses;
+
+    @FXML
+    private Button Button_CreateRandomProcess;
+
+    @FXML
+    private Button Button_NextStep;
+
+    @FXML
+    private ListView<?> ListView_noAllocateTable;
+
+    @FXML
+    private TableView<?> TableView_NEW;
+
+    @FXML
+    private TableView<?> TableView_Ready;
+
+    @FXML
+    private TableView<?> TableView_Running;
+
+    @FXML
+    private TableView<?> TableView_Terminated;
+
+    @FXML
+    void ClearAll(ActionEvent event) {
+        System.out.println("ClearAll");
+    }
+
+    @FXML
+    void CreateCustomProcess(ActionEvent event) {
+        System.out.println("CreateCustomProcess");
+    }
+
+    @FXML
+    void CreateManyProcesses(ActionEvent event) {
+        System.out.println("CreateManyProcesses");
+    }
+
+    @FXML
+    void CreateRandomProcess(ActionEvent event) {
+        System.out.println("CreateRandomProcess");
+    }
+
+    @FXML
+    void NextStep(ActionEvent event) {
+        System.out.println("NextStep");
+    }
 
 }
