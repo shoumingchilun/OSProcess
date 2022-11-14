@@ -25,5 +25,14 @@ public class ReadyList_test {
 
         ReadyList.setNull();
         System.out.println(ReadyList.Sprint());
+
+        ReadyList.addProcess(ProcessFactory.CreateProcess("1",1,2,1));
+        ReadyList.addProcess(ProcessFactory.CreateProcess("2",1,3,1));
+        ReadyList.addProcess(ProcessFactory.CreateProcess("3",1,4,1));
+        ReadyList.addProcess(ProcessFactory.CreateProcess("4",1,1,1));
+        ReadyList.addProcess(ProcessFactory.CreateProcess("5",1,5,1));
+        ReadyList.addProcess(ProcessFactory.CreateProcess("6",1,7,1));
+        ReadyList.order();
+        System.out.println(ReadyList.Sprint());
     }
 }

@@ -1,6 +1,9 @@
 package com.chilun.osprocessWithMemory.model.pojoAndFactory;
 
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -8,24 +11,34 @@ import java.util.Map;
  * @create 2022-11-13-19:24
  */
 public class Memory {
-    private static final BigDecimal TOTAL_SIZE = new BigDecimal(4*1024);//4个G
-    private Map<BigDecimal, BigDecimal> noAllocateTable;//记录起始位置和终止位置
+    public static final int TOTAL_SIZE = 4 * 1024;//4个G
+    private List<NoAllocateItem> noAllocateTable;//记录起始位置和未分分区大小
 
     private Memory() {
     }
 
-    public Map<BigDecimal, BigDecimal> getNoAllocateTable() {
+    public List<NoAllocateItem> getNoAllocateTable() {
         return noAllocateTable;
     }
 
     @Override
     public String toString() {
-        return "Memory{" +
-                "noAllocateTable=" + noAllocateTable +
-                '}';
+        return "主存使用情况：" + noAllocateTable;
     }
 
-    public void setNoAllocateTable(Map<BigDecimal, BigDecimal> noAllocateTable) {
+    public void setNoAllocateTable(List<NoAllocateItem> noAllocateTable) {
         this.noAllocateTable = noAllocateTable;
     }
+
+    public void order() {
+        Collections.sort(noAllocateTable);
+    }
+
+    public boolean addable(int size) {
+        order();
+        NoAllocateItem noAllocateItem = noAllocateTable.get(noAllocateTable.size() - 1);
+        return noAllocateItem.getSize() >= size;
+    }
+
+
 }

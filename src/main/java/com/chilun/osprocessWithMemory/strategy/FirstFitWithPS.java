@@ -1,6 +1,9 @@
 package com.chilun.osprocessWithMemory.strategy;
 
+import com.chilun.osprocessWithMemory.model.pojoAndFactory.Process;
 import com.chilun.osprocessWithMemory.model.service.OSService;
+
+import java.util.List;
 
 /**
  * @auther 齿轮
@@ -8,14 +11,22 @@ import com.chilun.osprocessWithMemory.model.service.OSService;
  */
 public class FirstFitWithPS {
 
-    public void nextStep(){
-        OSService.ChangeRunningList();
-        //接下来要补全队列按优先级排序的方法和有关主存的一系列方法
+    public void nextStep() {
+        //running到终止队列
+        OSService.UpdateRunningList();
+        //Ready队列到Running队列：算法——优先级
+        OSService.OrderReadyListByPriority();
+        List<Process> readyList = OSService.getReadyList();
+        while (readyList.size() > 0 && OSService.addableToRun()) {
+            Process process = readyList.get(0);
+            OSService.addRunningFromReady(process);
+        }
+        //对Ready队列中剩余的进程升级优先级
+        OSService.solveHungerByPromoteReadyPriority();
+
+        //将new队列加入到Ready队列
 
 
-//        UtilsMethods.ReadyListToRunningList();
-//        UtilsMethods.ChangeReadyPriority();
-//        UtilsMethods.WaitingListToReadyList();
-//        UtilsMethods.NewListToReadyList();
+        //接下来要补全有关主存的一系列方法
     }
 }
