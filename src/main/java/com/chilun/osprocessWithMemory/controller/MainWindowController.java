@@ -4,6 +4,11 @@ import com.chilun.osprocess.Model.MyProcess;
 import com.chilun.osprocess.Model.MyProcessFactory;
 import com.chilun.osprocess.MyApplication;
 import com.chilun.osprocess.utils.UtilsMethods;
+import com.chilun.osprocessWithMemory.model.pojoAndFactory.MemoryFactory;
+import com.chilun.osprocessWithMemory.model.pojoAndFactory.Process;
+import com.chilun.osprocessWithMemory.model.pojoAndFactory.ProcessFactory;
+import com.chilun.osprocessWithMemory.model.service.OSService;
+import com.chilun.osprocessWithMemory.view.UtilMethods;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,7 +60,12 @@ public class MainWindowController {
 
     @FXML
     void ClearAll(ActionEvent event) {
-        System.out.println("ClearAll");
+        OSService.cleanAll();
+        UtilMethods.cleanTableView(TableView_NEW);
+        UtilMethods.cleanTableView(TableView_Ready);
+        UtilMethods.cleanTableView(TableView_Running);
+        UtilMethods.cleanTableView(TableView_Terminated);
+        UtilMethods.cleanViewList(ListView_noAllocateTable);
     }
 
     @FXML
@@ -70,7 +80,11 @@ public class MainWindowController {
 
     @FXML
     void CreateRandomProcess(ActionEvent event) {
-        System.out.println("CreateRandomProcess");
+        double pid = Math.random() * 100 + 100;
+        Process process = ProcessFactory.CreateProcess("" + pid, (int) (Math.random() * 14) + 5, (int) (Math.random() * 8), (int) (Math.random() * 500) + 1);
+        OSService.addNew(process);
+        updateView();
+        OSService.printAll();
     }
 
     @FXML
@@ -78,4 +92,9 @@ public class MainWindowController {
         System.out.println("NextStep");
     }
 
+    void updateView(){
+        UtilMethods.updateAll(TableView_NEW,OSService.getNewList(),TableView_Ready,OSService.getReadyList(),
+                TableView_Running,OSService.getRunningList(),TableView_Terminated,OSService.getTerminatedList(),
+                ListView_noAllocateTable, MemoryFactory.getMemory());
+    }
 }

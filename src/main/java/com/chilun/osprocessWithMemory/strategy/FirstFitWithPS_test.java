@@ -1,6 +1,7 @@
 package com.chilun.osprocessWithMemory.strategy;
 
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.MemoryFactory;
+import com.chilun.osprocessWithMemory.model.pojoAndFactory.Process;
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.ProcessFactory;
 import com.chilun.osprocessWithMemory.model.queueConnection.NewList;
 import com.chilun.osprocessWithMemory.model.queueConnection.ReadyList;
@@ -13,18 +14,14 @@ import com.chilun.osprocessWithMemory.model.service.OSService;
  */
 public class FirstFitWithPS_test {
     public static void main(String[] args) throws Exception {
-        NewList.addProcess(ProcessFactory.CreateProcess("1", 5, 1, 120));
-        NewList.addProcess(ProcessFactory.CreateProcess("2", 4, 2, 120));
-        NewList.addProcess(ProcessFactory.CreateProcess("3", 2, 3, 120));
-        NewList.addProcess(ProcessFactory.CreateProcess("4", 2, 4, 120));
-        NewList.addProcess(ProcessFactory.CreateProcess("5", 2, 5, 120));
-        NewList.addProcess(ProcessFactory.CreateProcess("6", 2, 6, 120));
-        NewList.addProcess(ProcessFactory.CreateProcess("7", 2, 7, 120));
-        NewList.addProcess(ProcessFactory.CreateProcess("8", 2, 1, 120));
-        NewList.addProcess(ProcessFactory.CreateProcess("9", 2, 2, 120));
+        for (int i = 0; i < 10; i++) {
+            double pid = Math.random() * 100 + 100;
+            Process process = ProcessFactory.CreateProcess("" + pid, (int) (Math.random() * 14) + 5, (int) (Math.random() * 8), (int) (Math.random() * 500) + 1);
+            OSService.addNew(process);
+        }
         OSService.printAll();
         FirstFitWithPS f = new FirstFitWithPS();
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 25; i++) {
             f.nextStep();
             OSService.printAll();
             MemoryFactory.getMemory().order();

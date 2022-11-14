@@ -8,6 +8,7 @@ import com.chilun.osprocessWithMemory.model.queueConnection.RunningList;
 import com.chilun.osprocessWithMemory.model.queueConnection.TerminatedList;
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.Process;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -75,7 +76,8 @@ public class OSService {
     }
 
     public static void UpdateRunningList(Memory memory) {
-        List<Process> processes = RunningList.get();
+        List<Process> processes = RunningList.getOnlyReady();
+        List<Process> changed = new ArrayList<>();
         for (int i = 0; i < processes.size(); i++) {
             Process process = processes.get(i);
             int runTime = process.getRunTime();
@@ -83,9 +85,13 @@ public class OSService {
             process.setRunTime(runTime);
             if (runTime == 0) {
                 process.setPCBPtr("已回收");
-                addTerFromRunning(process);
+//                addTerFromRunning(process);
+                changed.add(process);
                 recycleMemory(memory, process);
             }
+        }
+        for (int i = 0; i < changed.size(); i++) {
+            addTerFromRunning(changed.get(i));
         }
     }
 
