@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="300.0" prefHeight="30.0" text="Running队列：" />
+      <Label prefHeight="30.0" prefWidth="250.0" text="New队列：" />
+      <Label layoutY="335.0" prefHeight="30.0" text="Ready队列：" />
+      <Label layoutX="300.0" layoutY="335.0" prefHeight="30.0" text="Terminated队列：" />
+      <TableView fx:id="TableView_NEW" layoutY="30.0" prefHeight="305.0" prefWidth="300.0">
+        <columns>
+          <TableColumn prefWidth="40.0" text="pid" />
+          <TableColumn prefWidth="40.0" text="优先级" />
+            <TableColumn prefWidth="40.0" text="起始" />
+            <TableColumn prefWidth="40.0" text="大小" />
+            <TableColumn prefWidth="40.0" text="时间" />
+            <TableColumn minWidth="8.000015258789062" prefWidth="100.0" text="PCB" />
+        </columns>
+      </TableView>
+      <TableView fx:id="TableView_Running" layoutX="300.0" layoutY="30.0" prefHeight="305.0" prefWidth="300.0">
+         <columns>
+            <TableColumn prefWidth="40.0" text="pid" />
+            <TableColumn prefWidth="40.0" text="优先级" />
+            <TableColumn prefWidth="40.0" text="起始" />
+            <TableColumn prefWidth="40.0" text="大小" />
+            <TableColumn prefWidth="40.0" text="时间" />
+            <TableColumn minWidth="8.000015258789062" prefWidth="100.0" text="PCB" />
+         </columns>
+      </TableView>
+      <TableView fx:id="TableView_Ready" layoutY="365.0" prefHeight="305.0" prefWidth="300.0">
+         <columns>
+            <TableColumn prefWidth="40.0" text="pid" />
+            <TableColumn prefWidth="40.0" text="优先级" />
+            <TableColumn prefWidth="40.0" text="起始" />
+            <TableColumn prefWidth="40.0" text="大小" />
+            <TableColumn prefWidth="40.0" text="时间" />
+            <TableColumn minWidth="8.000015258789062" prefWidth="100.0" text="PCB" />
+         </columns>
+      </TableView>
+      <TableView fx:id="TableView_Terminated" layoutX="300.0" layoutY="365.0" prefHeight="305.0" prefWidth="300.0">
+         <columns>
+            <TableColumn prefWidth="40.0" text="pid" />
+            <TableColumn prefWidth="40.0" text="优先级" />
+            <TableColumn prefWidth="40.0" text="起始" />
+            <TableColumn prefWidth="40.0" text="大小" />
+            <TableColumn prefWidth="40.0" text="时间" />
+            <TableColumn minWidth="8.000015258789062" prefWidth="100.0" text="PCB" />
+         </columns>
+      </TableView>
+      <Button layoutY="670.0" mnemonicParsing="false" prefHeight="30.0" text="创建自定义进程" />
+      <Button layoutX="100.0" layoutY="670.0" mnemonicParsing="false" prefHeight="30.0" text="创建随机进程" />
+      <Button layoutX="300.0" layoutY="670.0" mnemonicParsing="false" prefHeight="30.0" text="批量创建随机进程" />
+      <Button layoutX="512.0" layoutY="670.0" mnemonicParsing="false" prefHeight="30.0" text="清空全部队列" />
+      <Label layoutX="600.0" prefHeight="30.0" prefWidth="200.0" text="未分分区表：" />
+      <Label layoutX="800.0" layoutY="-1.0" prefHeight="30.0" prefWidth="200.0" text="图形演示：" />
+      <ListView fx:id="ListView_noAllocateTable" layoutX="600.0" layoutY="30.0" prefHeight="670.0" prefWidth="200.0" />
+      <Button layoutX="188.0" layoutY="670.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="112.0" text="下一步" />
+   </children>
+</AnchorPane>

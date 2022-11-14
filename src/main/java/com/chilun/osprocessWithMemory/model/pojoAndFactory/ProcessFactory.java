@@ -30,8 +30,8 @@ public class ProcessFactory {
         if (process != null) {
             //初始化进程类的元素
             process.setBeginSite(-1);
-            process.setState(0);
             process.setPCBPtr(null);
+            process.setPCBPtr("未分配");
         }
         return process;
     }

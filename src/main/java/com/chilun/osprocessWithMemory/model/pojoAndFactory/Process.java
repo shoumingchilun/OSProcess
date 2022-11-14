@@ -10,7 +10,6 @@ public class Process {
     private String pid;
     private int runTime;
     private int priority;
-    private int state;
     private int size;
     private int beginSite;
     private String PCBPtr;
@@ -40,14 +39,6 @@ public class Process {
 
     public void setPriority(int priority) {
         this.priority = priority;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
     }
 
     public int getSize() {
@@ -87,7 +78,6 @@ public class Process {
         return  pid  +
                 "：剩余时间 =" + runTime +
                 ", priority=" + priority +
-                ", state=" + state +
                 ", size=" + size +
                 ", beginSite=" + beginSite +
                 ", PCBPtr='" + PCBPtr +
@@ -96,6 +86,6 @@ public class Process {
 
     @Override
     public int hashCode() {
-        return Objects.hash(pid, runTime, priority, state, size, beginSite, PCBPtr);
+        return Objects.hash(pid, runTime, priority,  size, beginSite, PCBPtr);
     }
 }

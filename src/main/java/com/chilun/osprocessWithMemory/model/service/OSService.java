@@ -82,6 +82,7 @@ public class OSService {
             runTime--;
             process.setRunTime(runTime);
             if (runTime == 0) {
+                process.setPCBPtr("已回收");
                 addTerFromRunning(process);
                 recycleMemory(memory, process);
             }

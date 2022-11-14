@@ -33,16 +33,17 @@ public class FirstFitWithPS {
         List<Process> addedList = new ArrayList<>();//存储已加入的进程
         for (int i = 0; i < newList.size(); i++) {
             Process process = newList.get(i);
-            if (OSService.addableToMemory(MemoryFactory.getMemory(),process)){
+            if (OSService.addableToMemory(MemoryFactory.getMemory(), process)) {
                 try {
-                    OSService.allocateMemory(MemoryFactory.getMemory(),process);
+                    OSService.allocateMemory(MemoryFactory.getMemory(), process);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 addedList.add(process);
+                process.setPCBPtr("" + process.hashCode());
             }
         }
-            //已实现将可加入的process加到内存中，接下来的将已加入的process从NewList移动到ReadyList
+        //已实现将可加入的process加到内存中，接下来的将已加入的process从NewList移动到ReadyList
         OSService.addListToReadyFromNew(addedList);
     }
 }
