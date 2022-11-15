@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chilun.osprocessWithMemory.controller.MainWindowController">
    <children>
@@ -57,9 +59,12 @@
       <Button fx:id="Button_CreateManyProcesses" layoutX="300.0" layoutY="670.0" mnemonicParsing="false" onAction="#CreateManyProcesses" prefHeight="30.0" text="随机创建5个进程" />
       <Button fx:id="Button_ClearAll" layoutX="512.0" layoutY="670.0" mnemonicParsing="false" onAction="#ClearAll" prefHeight="30.0" text="清空全部队列" />
       <Label layoutX="600.0" prefHeight="30.0" prefWidth="200.0" text="未分分区表：" />
-      <Label layoutX="800.0" layoutY="-1.0" prefHeight="30.0" prefWidth="200.0" text="图形演示：" />
+      <Label layoutX="800.0" layoutY="-1.0" prefHeight="30.0" prefWidth="200.0" text="图形演示(红色为未分分区):" />
       <ListView fx:id="ListView_noAllocateTable" layoutX="600.0" layoutY="30.0" prefHeight="670.0" prefWidth="200.0" />
       <Button fx:id="Button_NextStep" layoutX="188.0" layoutY="670.0" mnemonicParsing="false" onAction="#NextStep" prefHeight="30.0" prefWidth="112.0" text="下一步" />
-      <AnchorPane fx:id="PANE_SHAPE" layoutX="800.0" layoutY="30.0" prefHeight="670.0" prefWidth="200.0" />
+      <AnchorPane fx:id="PANE_SHAPE" layoutX="800.0" layoutY="30.0" prefHeight="670.0" prefWidth="200.0">
+         <children>
+            <Group fx:id="GROUP_SHAPE" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>

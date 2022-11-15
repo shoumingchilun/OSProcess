@@ -7,10 +7,13 @@ import com.chilun.osprocessWithMemory.model.pojoAndFactory.Process;
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.ProcessFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -27,7 +30,7 @@ import java.util.Stack;
 public class UtilMethods {
     private static final Stack<Process> TempStorageForNewProcess = new Stack<>();
 
-    public static void updateAll(TableView<Process> tableView_new, List<Process> newList, TableView<Process> tableView_ready, List<Process> readyList, TableView<Process> tableView_running, List<Process> runningList, TableView<Process> tableView_terminated, List<Process> terminatedList, ListView<Process> listView_noAllocateTable, Memory memory, AnchorPane PANE_SHAPE) {
+    public static void updateAll(TableView<Process> tableView_new, List<Process> newList, TableView<Process> tableView_ready, List<Process> readyList, TableView<Process> tableView_running, List<Process> runningList, TableView<Process> tableView_terminated, List<Process> terminatedList, ListView<Process> listView_noAllocateTable, Memory memory, Group PANE_SHAPE) {
         update(tableView_new, newList);
         update(tableView_ready, readyList);
         update(tableView_running, runningList);
@@ -36,9 +39,16 @@ public class UtilMethods {
         update(PANE_SHAPE, memory);
     }
 
-    private static void update(AnchorPane pane_shape, Memory memory) {
-
+    private static void update(Group group, Memory memory) {
+        group.getChildren().clear();
+        group.getChildren().add(new Rectangle(0,0,200,670));
+        for (NoAllocateItem item : memory.getNoAllocateTable()) {
+            Rectangle rectangle = new Rectangle(0, (int) (item.getBeginSite() * 670.0 / 4096), 200, (int) (item.getSize() * 670.0 / 4096));
+            rectangle.setFill(Color.RED);
+            group.getChildren().add(rectangle);
+        }
     }
+
 
     public static void update(TableView<Process> tableView, List<Process> list) {
         tableView.getItems().clear();

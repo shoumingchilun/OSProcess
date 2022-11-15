@@ -13,6 +13,7 @@ import com.chilun.osprocessWithMemory.view.UtilMethods;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -64,6 +65,10 @@ public class MainWindowController {
 
     @FXML
     private AnchorPane PANE_SHAPE;
+
+
+    @FXML
+    private Group GROUP_SHAPE;
 
     @FXML
     void ClearAll(ActionEvent event) {
@@ -123,7 +128,7 @@ public class MainWindowController {
     void updateView() {
         UtilMethods.updateAll(TableView_NEW, OSService.getNewList(), TableView_Ready, OSService.getReadyList(),
                 TableView_Running, OSService.getRunningList(), TableView_Terminated, OSService.getTerminatedList(),
-                ListView_noAllocateTable, MemoryFactory.getMemory(), PANE_SHAPE);
+                ListView_noAllocateTable, MemoryFactory.getMemory(), GROUP_SHAPE);
     }
 
     boolean initialed = false;
