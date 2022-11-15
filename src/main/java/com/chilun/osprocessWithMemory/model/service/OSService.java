@@ -1,6 +1,7 @@
 package com.chilun.osprocessWithMemory.model.service;
 
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.Memory;
+import com.chilun.osprocessWithMemory.model.pojoAndFactory.MemoryFactory;
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.NoAllocateItem;
 import com.chilun.osprocessWithMemory.model.queueConnection.NewList;
 import com.chilun.osprocessWithMemory.model.queueConnection.ReadyList;
@@ -21,6 +22,8 @@ public class OSService {
         ReadyList.setNull();
         RunningList.setNull();
         TerminatedList.setNull();
+        MemoryFactory.getMemory().getNoAllocateTable().clear();
+        MemoryFactory.getMemory().getNoAllocateTable().add(new NoAllocateItem(0,Memory.TOTAL_SIZE));
     }
 
     public static void printAll() {

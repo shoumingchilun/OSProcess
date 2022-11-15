@@ -45,9 +45,6 @@ public class MainWindowController {
     private Button Button_CreateManyProcesses;
 
     @FXML
-    private Button Button_CreateRandomProcess;
-
-    @FXML
     private Button Button_NextStep;
 
     @FXML
@@ -112,17 +109,6 @@ public class MainWindowController {
         OSService.printAll();
     }
 int createdNum = 0;
-    @FXML
-    void CreateRandomProcess(ActionEvent event) {
-        if (!initialed){
-            initialAll();
-        }
-        int pid = (int)(Math.random() * 100 + 100);
-        Process process = ProcessFactory.CreateProcess("" + pid, (int) (Math.random() * 14) + 5, (int) (Math.random() * 8), (int) (Math.random() * 500) + 1);
-        OSService.addNew(process);
-        updateView();
-        OSService.printAll();
-    }
 
     @FXML
     void NextStep(ActionEvent event) {
