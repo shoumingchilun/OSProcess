@@ -38,3 +38,4 @@
                 ReadyList：Ready队列，判断能否加入的逻辑写在策略类中。
                 RunningList：Running队列，内部包含了有无剩余道数的逻辑，可使用addable函数判断是否可继续加入。
                 TerminatedList：Terminated队列。
+其余略。。。
