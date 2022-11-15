@@ -15,7 +15,7 @@
       <Label layoutX="300.0" layoutY="335.0" prefHeight="30.0" text="Terminated队列：" />
       <TableView fx:id="TableView_NEW" layoutY="30.0" prefHeight="305.0" prefWidth="300.0">
         <columns>
-          <TableColumn prefWidth="40.0" text="pid" />
+          <TableColumn prefWidth="50.0" text="pid" />
           <TableColumn prefWidth="40.0" text="优先级" />
             <TableColumn prefWidth="40.0" text="起始" />
             <TableColumn prefWidth="40.0" text="大小" />
@@ -25,7 +25,7 @@
       </TableView>
       <TableView fx:id="TableView_Running" layoutX="300.0" layoutY="30.0" prefHeight="305.0" prefWidth="300.0">
          <columns>
-            <TableColumn prefWidth="40.0" text="pid" />
+            <TableColumn prefWidth="50.0" text="pid" />
             <TableColumn prefWidth="40.0" text="优先级" />
             <TableColumn prefWidth="40.0" text="起始" />
             <TableColumn prefWidth="40.0" text="大小" />
@@ -35,7 +35,7 @@
       </TableView>
       <TableView fx:id="TableView_Ready" layoutY="365.0" prefHeight="305.0" prefWidth="300.0">
          <columns>
-            <TableColumn prefWidth="40.0" text="pid" />
+            <TableColumn prefWidth="50.0" text="pid" />
             <TableColumn prefWidth="40.0" text="优先级" />
             <TableColumn prefWidth="40.0" text="起始" />
             <TableColumn prefWidth="40.0" text="大小" />
@@ -45,7 +45,7 @@
       </TableView>
       <TableView fx:id="TableView_Terminated" layoutX="300.0" layoutY="365.0" prefHeight="305.0" prefWidth="300.0">
          <columns>
-            <TableColumn prefWidth="40.0" text="pid" />
+            <TableColumn prefWidth="50.0" text="pid" />
             <TableColumn prefWidth="40.0" text="优先级" />
             <TableColumn prefWidth="40.0" text="起始" />
             <TableColumn prefWidth="40.0" text="大小" />

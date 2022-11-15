@@ -1,22 +1,31 @@
 package com.chilun.osprocessWithMemory.view;
 
+import com.chilun.osprocessWithMemory.NewApplication;
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.Memory;
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.NoAllocateItem;
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.Process;
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.ProcessFactory;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @auther 齿轮
  * @create 2022-11-14-21:49
  */
 public class UtilMethods {
+    private static final Stack<Process> TempStorageForNewProcess = new Stack<>();
 
     public static void updateAll(TableView<Process> tableView_new, List<Process> newList, TableView<Process> tableView_ready, List<Process> readyList, TableView<Process> tableView_running, List<Process> runningList, TableView<Process> tableView_terminated, List<Process> terminatedList, ListView<Process> listView_noAllocateTable, Memory memory, AnchorPane PANE_SHAPE) {
         update(tableView_new, newList);
@@ -47,5 +56,25 @@ public class UtilMethods {
             strings.add(item.toString() + "\t\tsize:" + (item.getSize()));
         }
         listView.setItems(FXCollections.observableList(strings));
+    }
+
+    public static Process createNewProcess() throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(NewApplication.class.getResource("NewProcess.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 360, 290);
+        Stage stage = new Stage();
+        stage.setTitle("创建新进程");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+        return getFromNewStack();
+    }
+    public static Process getFromNewStack() {
+        return TempStorageForNewProcess.pop();
+    }
+    public static void addToNewStack(Process process) {
+        TempStorageForNewProcess.push(process);
     }
 }

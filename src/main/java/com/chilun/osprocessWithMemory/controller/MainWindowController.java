@@ -33,7 +33,7 @@ import java.util.List;
 
 public class MainWindowController {
 
-    private static final FirstFitWithPS fp= new FirstFitWithPS();
+    private static final FirstFitWithPS fp = new FirstFitWithPS();
 
     @FXML
     private Button Button_ClearAll;
@@ -73,11 +73,28 @@ public class MainWindowController {
     }
 
     @FXML
-    void CreateCustomProcess(ActionEvent event) {
-        if (!initialed){
+    void CreateCustomProcess(ActionEvent event) throws IOException {
+        if (!initialed) {
             initialAll();
         }
-        System.out.println("CreateCustomProcess");
+        OSService.addNew(UtilMethods.createNewProcess());
+        updateView();
+        OSService.printAll();
+    }
+
+    int createdNum = 0;
+
+    @FXML
+    void CreateManyProcesses(ActionEvent event) {
+        if (!initialed) {
+            initialAll();
+        }
+        for (int i = 0; i < 5; i++) {
+            Process process = ProcessFactory.CreateProcess("进程" + createdNum++, (int) (Math.random() * 14) + 5, (int) (Math.random() * 8), (int) (Math.random() * 500) + 1);
+            OSService.addNew(process);
+        }
+        updateView();
+        OSService.printAll();
     }
 
     private void initialAll() {
@@ -97,30 +114,17 @@ public class MainWindowController {
     }
 
     @FXML
-    void CreateManyProcesses(ActionEvent event) {
-        if (!initialed){
-            initialAll();
-        }
-        for (int i = 0; i < 5; i++) {
-            Process process = ProcessFactory.CreateProcess("进程" + createdNum++, (int) (Math.random() * 14) + 5, (int) (Math.random() * 8), (int) (Math.random() * 500) + 1);
-            OSService.addNew(process);
-        }
-        updateView();
-        OSService.printAll();
-    }
-int createdNum = 0;
-
-    @FXML
     void NextStep(ActionEvent event) {
         fp.nextStep();
         updateView();
         OSService.printAll();
     }
 
-    void updateView(){
-        UtilMethods.updateAll(TableView_NEW,OSService.getNewList(),TableView_Ready,OSService.getReadyList(),
-                TableView_Running,OSService.getRunningList(),TableView_Terminated,OSService.getTerminatedList(),
-                ListView_noAllocateTable, MemoryFactory.getMemory(),PANE_SHAPE);
+    void updateView() {
+        UtilMethods.updateAll(TableView_NEW, OSService.getNewList(), TableView_Ready, OSService.getReadyList(),
+                TableView_Running, OSService.getRunningList(), TableView_Terminated, OSService.getTerminatedList(),
+                ListView_noAllocateTable, MemoryFactory.getMemory(), PANE_SHAPE);
     }
+
     boolean initialed = false;
 }
