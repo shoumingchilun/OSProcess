@@ -61,5 +61,6 @@
       <Label layoutX="800.0" layoutY="-1.0" prefHeight="30.0" prefWidth="200.0" text="图形演示：" />
       <ListView fx:id="ListView_noAllocateTable" layoutX="600.0" layoutY="30.0" prefHeight="670.0" prefWidth="200.0" />
       <Button fx:id="Button_NextStep" layoutX="188.0" layoutY="670.0" mnemonicParsing="false" onAction="#NextStep" prefHeight="30.0" prefWidth="112.0" text="下一步" />
+      <AnchorPane fx:id="PANE_SHAPE" layoutX="800.0" layoutY="30.0" prefHeight="670.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

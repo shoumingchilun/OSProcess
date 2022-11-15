@@ -4,6 +4,7 @@ import com.chilun.osprocess.Model.MyProcess;
 import com.chilun.osprocess.Model.MyProcessFactory;
 import com.chilun.osprocess.MyApplication;
 import com.chilun.osprocess.utils.UtilsMethods;
+import com.chilun.osprocessWithMemory.strategy.FirstFitWithPS;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +42,6 @@ public class HelloController {
     ListView List_RunningQueue;
     @FXML
     ListView List_TerminatedQueue;
-
 
     public void AddNewProcess(ActionEvent event) throws IOException {
         MyProcess newProcess = UtilsMethods.getProcessFromCreate();

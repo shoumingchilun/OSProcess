@@ -19,4 +19,5 @@ module com.chilun.osprocessWithMemory{
         exports com.chilun.osprocessWithMemory;
         exports com.chilun.osprocessWithMemory.controller;
         opens com.chilun.osprocessWithMemory.controller to javafx.fxml;
+        opens com.chilun.osprocessWithMemory.model.pojoAndFactory to javafx.base;
 }

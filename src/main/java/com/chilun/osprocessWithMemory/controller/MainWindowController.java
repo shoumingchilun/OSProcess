@@ -8,6 +8,7 @@ import com.chilun.osprocessWithMemory.model.pojoAndFactory.MemoryFactory;
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.Process;
 import com.chilun.osprocessWithMemory.model.pojoAndFactory.ProcessFactory;
 import com.chilun.osprocessWithMemory.model.service.OSService;
+import com.chilun.osprocessWithMemory.strategy.FirstFitWithPS;
 import com.chilun.osprocessWithMemory.view.UtilMethods;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +17,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +32,9 @@ import java.util.List;
  */
 
 public class MainWindowController {
+
+    private static final FirstFitWithPS fp= new FirstFitWithPS();
+
     @FXML
     private Button Button_ClearAll;
 
@@ -44,43 +51,73 @@ public class MainWindowController {
     private Button Button_NextStep;
 
     @FXML
-    private ListView<?> ListView_noAllocateTable;
+    private ListView<Process> ListView_noAllocateTable;
 
     @FXML
-    private TableView<?> TableView_NEW;
+    private TableView<Process> TableView_NEW;
 
     @FXML
-    private TableView<?> TableView_Ready;
+    private TableView<Process> TableView_Ready;
 
     @FXML
-    private TableView<?> TableView_Running;
+    private TableView<Process> TableView_Running;
 
     @FXML
-    private TableView<?> TableView_Terminated;
+    private TableView<Process> TableView_Terminated;
+
+    @FXML
+    private AnchorPane PANE_SHAPE;
 
     @FXML
     void ClearAll(ActionEvent event) {
         OSService.cleanAll();
-        UtilMethods.cleanTableView(TableView_NEW);
-        UtilMethods.cleanTableView(TableView_Ready);
-        UtilMethods.cleanTableView(TableView_Running);
-        UtilMethods.cleanTableView(TableView_Terminated);
-        UtilMethods.cleanViewList(ListView_noAllocateTable);
+        updateView();
+        OSService.printAll();
     }
 
     @FXML
     void CreateCustomProcess(ActionEvent event) {
+        if (!initialed){
+            initialAll();
+        }
         System.out.println("CreateCustomProcess");
+    }
+
+    private void initialAll() {
+        initialOne(TableView_NEW);
+        initialOne(TableView_Ready);
+        initialOne(TableView_Running);
+        initialOne(TableView_Terminated);
+    }
+
+    private void initialOne(TableView<Process> tableView) {
+        tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("pid"));
+        tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("priority"));
+        tableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("beginSite"));
+        tableView.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("size"));
+        tableView.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("runTime"));
+        tableView.getColumns().get(5).setCellValueFactory(new PropertyValueFactory<>("PCBPtr"));
     }
 
     @FXML
     void CreateManyProcesses(ActionEvent event) {
-        System.out.println("CreateManyProcesses");
+        if (!initialed){
+            initialAll();
+        }
+        for (int i = 0; i < 5; i++) {
+            Process process = ProcessFactory.CreateProcess("进程" + createdNum++, (int) (Math.random() * 14) + 5, (int) (Math.random() * 8), (int) (Math.random() * 500) + 1);
+            OSService.addNew(process);
+        }
+        updateView();
+        OSService.printAll();
     }
-
+int createdNum = 0;
     @FXML
     void CreateRandomProcess(ActionEvent event) {
-        double pid = Math.random() * 100 + 100;
+        if (!initialed){
+            initialAll();
+        }
+        int pid = (int)(Math.random() * 100 + 100);
         Process process = ProcessFactory.CreateProcess("" + pid, (int) (Math.random() * 14) + 5, (int) (Math.random() * 8), (int) (Math.random() * 500) + 1);
         OSService.addNew(process);
         updateView();
@@ -89,12 +126,15 @@ public class MainWindowController {
 
     @FXML
     void NextStep(ActionEvent event) {
-        System.out.println("NextStep");
+        fp.nextStep();
+        updateView();
+        OSService.printAll();
     }
 
     void updateView(){
         UtilMethods.updateAll(TableView_NEW,OSService.getNewList(),TableView_Ready,OSService.getReadyList(),
                 TableView_Running,OSService.getRunningList(),TableView_Terminated,OSService.getTerminatedList(),
-                ListView_noAllocateTable, MemoryFactory.getMemory());
+                ListView_noAllocateTable, MemoryFactory.getMemory(),PANE_SHAPE);
     }
+    boolean initialed = false;
 }

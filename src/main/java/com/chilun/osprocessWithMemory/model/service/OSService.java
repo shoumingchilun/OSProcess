@@ -58,11 +58,18 @@ public class OSService {
         }
     }
 
-    public static void addTerFromRunning(Process process) {
+    public static void addTerFromRunning(Process process) throws Exception {
         boolean b = TerminatedList.addProcess(process);
         boolean b1 = RunningList.deleteProcess(process);
-        if (!b && b1) {
-            throw new RuntimeException("OSService.addTerFromRunning失败了！");
+        if (!(b && b1)) {
+            String wrongInfo = "";
+            if (!b){
+                wrongInfo+="添加到Terminated错误，";
+            }
+            if(!b1){
+                wrongInfo+="从Running删除错误，";
+            }
+            throw new Exception(wrongInfo+"OSService.addTerFromRunning失败了:Process"+process);
         }
     }
 
@@ -90,9 +97,14 @@ public class OSService {
                 recycleMemory(memory, process);
             }
         }
-        for (int i = 0; i < changed.size(); i++) {
-            addTerFromRunning(changed.get(i));
-        }
+
+            for (Process process : changed) {
+                try {
+                addTerFromRunning(process);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
     }
 
     public static boolean addableToRun() {
